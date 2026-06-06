@@ -1,11 +1,51 @@
-# DesignPatterns
+# Design Patterns Lab
 
-> Portfolio status: legacy study notes.
->
-> This repository is preserved as part of my learning history. It is not one of
-> my curated portfolio projects and may be archived or made private later.
-> Current portfolio projects prioritize original implementation, tests,
-> architecture documentation, CI/CD, and production-oriented practices.
+> Portfolio status: active Java design patterns lab.
 
-⛺TheCodingCabin 👋 Vamos conhecer um pouco de Design Patterns.
-![Design Patterns](https://user-images.githubusercontent.com/105243897/208307377-8e6b1e75-70e7-46bf-b7c2-92d00b4027fd.png)
+This repository is being rebuilt as a practical design patterns lab in Java.
+Its purpose is to show how classic patterns can solve concrete problems without
+turning examples into artificial code.
+
+## Why This Repository Exists
+
+Design patterns are useful in interviews when they are explained through intent,
+trade-offs, and maintainable code. This lab keeps each example small, tested,
+and connected to backend engineering scenarios.
+
+Current focus:
+
+- Java 21;
+- object-oriented design;
+- readable pattern examples;
+- testable implementations;
+- small commit discipline.
+
+## Current Example
+
+### Strategy Pattern
+
+The first example uses the Strategy pattern to calculate checkout discounts.
+
+It demonstrates:
+
+- defining a stable behavior contract with `DiscountStrategy`;
+- swapping discount rules without changing `CheckoutService`;
+- validating edge cases through tests;
+- keeping business rules explicit and easy to extend.
+
+## Run Tests
+
+```bash
+mvn test
+```
+
+## Tech Stack
+
+- Java 21
+- Maven
+- JUnit Jupiter
+
+## Portfolio Role
+
+This is a supporting repository. It helps demonstrate design vocabulary and
+clean object-oriented thinking that can be referenced during interviews.
