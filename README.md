@@ -45,6 +45,19 @@ It demonstrates:
 - keeping caller code independent from constructor details;
 - testing both valid channel selection and invalid input.
 
+### Builder Pattern
+
+The Builder example creates immutable API request objects with required fields,
+optional fields, and defaults.
+
+It demonstrates:
+
+- making object creation readable when there are multiple parameters;
+- avoiding unclear constructor argument order;
+- validating required fields at build time;
+- applying sensible defaults for optional values;
+- keeping the final object immutable.
+
 ## Run Tests
 
 ```bash
