@@ -20,11 +20,11 @@ Current focus:
 - testable implementations;
 - small commit discipline.
 
-## Current Example
+## Current Examples
 
 ### Strategy Pattern
 
-The first example uses the Strategy pattern to calculate checkout discounts.
+The Strategy pattern example calculates checkout discounts.
 
 It demonstrates:
 
@@ -32,6 +32,18 @@ It demonstrates:
 - swapping discount rules without changing `CheckoutService`;
 - validating edge cases through tests;
 - keeping business rules explicit and easy to extend.
+
+### Factory Pattern
+
+The Factory example creates notification senders from a selected channel.
+
+It demonstrates:
+
+- centralizing object creation in `NotifierFactory`;
+- hiding concrete notifier classes behind the `Notifier` interface;
+- selecting implementations for email, SMS, and webhook notifications;
+- keeping caller code independent from constructor details;
+- testing both valid channel selection and invalid input.
 
 ## Run Tests
 
