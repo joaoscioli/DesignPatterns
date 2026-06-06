@@ -84,6 +84,19 @@ It demonstrates:
 - keeping side effects isolated behind observer implementations;
 - testing notification delivery and unsubscribe behavior.
 
+### Decorator Pattern
+
+The Decorator example enriches API responses with tracing and cache headers
+without changing the basic response renderer.
+
+It demonstrates:
+
+- adding responsibilities through composition instead of inheritance;
+- stacking decorators to combine independent behaviors;
+- preserving the original response body while enriching metadata;
+- validating decorator configuration;
+- testing decorated and undecorated response rendering.
+
 ## Run Tests
 
 ```bash
