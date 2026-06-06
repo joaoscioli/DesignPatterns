@@ -58,6 +58,19 @@ It demonstrates:
 - applying sensible defaults for optional values;
 - keeping the final object immutable.
 
+### Adapter Pattern
+
+The Adapter example connects a clean domain payment interface to a legacy
+payment client with a different method shape and response model.
+
+It demonstrates:
+
+- protecting domain code from external API details;
+- translating legacy responses into domain results;
+- keeping integration code isolated;
+- testing approved and rejected payment flows;
+- making future provider replacement easier.
+
 ## Run Tests
 
 ```bash
