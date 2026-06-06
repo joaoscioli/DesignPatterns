@@ -71,6 +71,19 @@ It demonstrates:
 - testing approved and rejected payment flows;
 - making future provider replacement easier.
 
+### Observer Pattern
+
+The Observer example publishes subscription lifecycle events to independent
+email and audit observers.
+
+It demonstrates:
+
+- notifying multiple subscribers without coupling the publisher to concrete actions;
+- subscribing and unsubscribing observers at runtime;
+- modeling simple domain events with explicit event types;
+- keeping side effects isolated behind observer implementations;
+- testing notification delivery and unsubscribe behavior.
+
 ## Run Tests
 
 ```bash
