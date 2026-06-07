@@ -97,6 +97,19 @@ It demonstrates:
 - validating decorator configuration;
 - testing decorated and undecorated response rendering.
 
+### Command Pattern
+
+The Command example queues billing actions such as invoice generation and
+subscription suspension behind a common executable contract.
+
+It demonstrates:
+
+- representing actions as objects;
+- decoupling command creation from command execution;
+- executing queued work in a predictable order;
+- validating command input before dispatch;
+- testing command results and queue cleanup.
+
 ## Run Tests
 
 ```bash
