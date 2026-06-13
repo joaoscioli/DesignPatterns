@@ -119,6 +119,7 @@ mvn test
 ## Interview Preparation
 
 - [Design Patterns Interview Guide](docs/interview-guide.md)
+- [Pattern Selection Guide](docs/pattern-selection.md)
 
 ## Tech Stack
 
