@@ -116,6 +116,10 @@ It demonstrates:
 mvn test
 ```
 
+## Interview Preparation
+
+- [Design Patterns Interview Guide](docs/interview-guide.md)
+
 ## Tech Stack
 
 - Java 21
