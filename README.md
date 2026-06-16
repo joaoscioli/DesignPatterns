@@ -121,6 +121,7 @@ mvn test
 - [Design Patterns Interview Guide](docs/interview-guide.md)
 - [Pattern Selection Guide](docs/pattern-selection.md)
 - [Design Pattern Anti-Patterns](docs/anti-patterns.md)
+- [Next Patterns Roadmap](docs/next-patterns-roadmap.md)
 
 ## Tech Stack
 
