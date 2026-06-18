@@ -110,6 +110,13 @@ It demonstrates:
 - validating command input before dispatch;
 - testing command results and queue cleanup.
 
+### Planned: Chain of Responsibility Pattern
+
+The Chain of Responsibility design notes describe a subscription approval flow
+where validation and approval steps are composed as independent handlers.
+
+See: [Chain of Responsibility Pattern Design](docs/chain-of-responsibility-design.md).
+
 ## Run Tests
 
 ```bash
