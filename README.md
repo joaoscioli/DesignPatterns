@@ -117,6 +117,13 @@ validation and approval steps are composed as independent handlers.
 
 See: [Chain of Responsibility Pattern Design](docs/chain-of-responsibility-design.md).
 
+### State Pattern
+
+The State example models subscription lifecycle transitions such as active,
+past due, canceled, and expired.
+
+See: [State Pattern Design](docs/state-pattern-design.md).
+
 ## Run Tests
 
 ```bash
