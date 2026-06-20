@@ -132,6 +132,7 @@ mvn test
 
 ## Interview Preparation
 
+- [Pattern Catalog](docs/pattern-catalog.md)
 - [Design Patterns Interview Guide](docs/interview-guide.md)
 - [Pattern Selection Guide](docs/pattern-selection.md)
 - [Design Pattern Anti-Patterns](docs/anti-patterns.md)
