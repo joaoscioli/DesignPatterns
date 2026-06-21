@@ -136,6 +136,7 @@ mvn test
 - [Test Map](docs/test-map.md)
 - [Design Patterns Interview Guide](docs/interview-guide.md)
 - [Pattern Selection Guide](docs/pattern-selection.md)
+- [Refactoring Signals](docs/refactoring-signals.md)
 - [Design Pattern Anti-Patterns](docs/anti-patterns.md)
 - [Next Patterns Roadmap](docs/next-patterns-roadmap.md)
 - [State Pattern Design](docs/state-pattern-design.md)
