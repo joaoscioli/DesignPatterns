@@ -14,6 +14,7 @@ behavior.
 | Command | `BillingCommandDispatcherTest` | Queued billing commands execute in order |
 | Chain of Responsibility | `SubscriptionApprovalChainTest` | Approval rules stop or continue the chain correctly |
 | State | `SubscriptionLifecycleTest` | Subscription transitions are state-specific |
+| Specification | `PlanUpgradePolicyTest` | Plan upgrade business rules compose and report failures |
 
 ## How To Use This In Interviews
 

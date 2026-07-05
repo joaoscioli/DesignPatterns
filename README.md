@@ -124,6 +124,13 @@ past due, canceled, and expired.
 
 See: [State Pattern Design](docs/state-pattern-design.md).
 
+### Specification Pattern
+
+The Specification example models plan upgrade eligibility by composing business
+rules for account status, unpaid invoices, plan changes, and seat limits.
+
+See: [Specification Pattern Design](docs/specification-pattern-design.md).
+
 ## Run Tests
 
 ```bash
@@ -141,6 +148,7 @@ mvn test
 - [Design Pattern Anti-Patterns](docs/anti-patterns.md)
 - [Next Patterns Roadmap](docs/next-patterns-roadmap.md)
 - [State Pattern Design](docs/state-pattern-design.md)
+- [Specification Pattern Design](docs/specification-pattern-design.md)
 
 ## Tech Stack
 

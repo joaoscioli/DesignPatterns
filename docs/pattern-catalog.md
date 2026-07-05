@@ -13,6 +13,7 @@ This catalog helps reviewers understand what each example demonstrates.
 | Command | Billing action dispatch | Represent work as executable objects |
 | Chain of Responsibility | Subscription approval flow | Compose ordered validation and approval steps |
 | State | Subscription lifecycle transitions | Keep state-specific behavior explicit |
+| Specification | Plan upgrade eligibility | Compose reusable business rules |
 
 ## How To Read This Repository
 
