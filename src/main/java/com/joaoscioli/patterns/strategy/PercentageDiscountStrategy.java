@@ -1,5 +1,7 @@
 package com.joaoscioli.patterns.strategy;
 
+import java.math.BigInteger;
+
 public class PercentageDiscountStrategy implements DiscountStrategy {
     private final int percentage;
 
@@ -13,7 +15,11 @@ public class PercentageDiscountStrategy implements DiscountStrategy {
 
     @Override
     public long applyTo(long subtotalCents) {
-        return subtotalCents - (subtotalCents * percentage / 100);
+        var discount = BigInteger.valueOf(subtotalCents)
+                .multiply(BigInteger.valueOf(percentage))
+                .divide(BigInteger.valueOf(100))
+                .longValueExact();
+        return subtotalCents - discount;
     }
 
     @Override

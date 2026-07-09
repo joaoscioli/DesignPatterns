@@ -41,6 +41,16 @@ class CheckoutServiceTest {
         assertEquals(0, result.finalAmountCents());
     }
 
+    @Test
+    void percentageDiscountDoesNotOverflowForLargeMonetaryValues() {
+        CheckoutResult result = checkoutService.checkout(
+                Long.MAX_VALUE,
+                new PercentageDiscountStrategy(100)
+        );
+
+        assertEquals(0, result.finalAmountCents());
+    }
+
     @ParameterizedTest
     @ValueSource(longs = {0, -1, -1000})
     void rejectsInvalidSubtotal(long subtotalCents) {
