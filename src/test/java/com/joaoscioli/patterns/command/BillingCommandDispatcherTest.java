@@ -36,6 +36,18 @@ class BillingCommandDispatcherTest {
     }
 
     @Test
+    void keepsCommandsQueuedWhenDispatchFails() {
+        BillingCommandDispatcher dispatcher = new BillingCommandDispatcher();
+        dispatcher.enqueue(() -> {
+            throw new IllegalStateException("payment provider unavailable");
+        });
+
+        assertThrows(IllegalStateException.class, dispatcher::dispatchAll);
+
+        assertEquals(1, dispatcher.queuedCommands());
+    }
+
+    @Test
     void rejectsInvalidInvoiceAmount() {
         assertThrows(IllegalArgumentException.class, () -> new GenerateInvoiceCommand("cus-123", 0));
     }
