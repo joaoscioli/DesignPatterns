@@ -10,6 +10,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BillingCommandDispatcherTest {
     @Test
+    void dispatchingEmptyQueueReturnsNoResults() {
+        BillingCommandDispatcher dispatcher = new BillingCommandDispatcher();
+
+        List<CommandResult> results = dispatcher.dispatchAll();
+
+        assertAll(
+                () -> assertEquals(0, results.size()),
+                () -> assertEquals(0, dispatcher.queuedCommands())
+        );
+    }
+
+    @Test
     void dispatchesQueuedCommandsInOrder() {
         BillingCommandDispatcher dispatcher = new BillingCommandDispatcher();
 
