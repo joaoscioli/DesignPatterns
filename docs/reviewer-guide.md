@@ -10,6 +10,7 @@ what engineering signals to look for.
 3. `docs/pattern-selection.md` for when each pattern is useful.
 4. `docs/pattern-tradeoffs.md` for costs and misuse cases.
 5. `src/test/java` for behavior-focused examples.
+6. Command tests for failure and empty-queue behavior.
 
 ## Strong Signals
 
@@ -17,6 +18,8 @@ what engineering signals to look for.
 - Tests show expected behavior and protect the pattern intent.
 - Documentation explains trade-offs, refactoring signals, and anti-patterns.
 - New patterns are added with code, tests, and a short design note.
+- Edge cases are tested so the examples read like production-oriented design,
+  not only pattern demonstrations.
 
 ## Interview Talking Points
 
@@ -24,3 +27,4 @@ what engineering signals to look for.
   different kinds of change.
 - Discuss when a pattern is overengineering.
 - Show how tests make pattern behavior easier to review than diagrams alone.
+- Explain how failure behavior affects whether a pattern is safe to use.
