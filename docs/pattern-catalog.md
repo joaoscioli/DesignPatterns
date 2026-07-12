@@ -28,3 +28,7 @@ unnecessary abstraction.
 A strong answer does not only name a pattern. It explains the pressure that
 made the pattern useful, the trade-off introduced by the abstraction, and how
 tests prove the behavior.
+
+For the Command example, also discuss failure behavior. The dispatcher keeps
+queued commands when execution fails, which makes the retry decision explicit
+instead of silently losing work.
