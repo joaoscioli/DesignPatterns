@@ -15,9 +15,15 @@ useful for backend interviews.
 
 ## Priority
 
-1. State pattern for subscription lifecycle.
-2. Chain of Responsibility for request validation.
-3. Specification for business-rule composition.
+1. Template Method for billing retry workflows.
+2. Proxy for access control or caching boundaries.
+3. Composite for composed pricing rules.
+
+Already covered:
+
+- State pattern for subscription lifecycle.
+- Chain of Responsibility for request validation.
+- Specification for business-rule composition.
 
 ## Selection Criteria
 
@@ -35,3 +41,5 @@ New examples should:
 - Lifecycle-heavy domains often benefit from State.
 - Validation workflows can be modeled as chains.
 - Specifications help when rules need composition.
+- Template Method is useful when workflow order must stay fixed but individual
+  steps vary by provider or policy.
