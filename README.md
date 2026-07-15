@@ -150,6 +150,12 @@ mvn test
 - [State Pattern Design](docs/state-pattern-design.md)
 - [Specification Pattern Design](docs/specification-pattern-design.md)
 
+## Interview Checkpoint
+
+A reviewer should inspect the Command, State, and Specification examples first.
+Together they show how patterns are selected from business pressure instead of
+being added as decoration.
+
 ## Tech Stack
 
 - Java 21
