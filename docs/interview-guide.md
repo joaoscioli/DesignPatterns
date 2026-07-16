@@ -44,3 +44,5 @@ patterns to simplify real code.
 - How can Observer create debugging complexity?
 - Why can Decorator be preferable to inheritance?
 - How does Command relate to background jobs or queues?
+- Why should failure behavior be part of the pattern example?
+- How do State and Specification solve different kinds of domain complexity?
