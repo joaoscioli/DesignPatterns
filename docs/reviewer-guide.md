@@ -28,3 +28,9 @@ what engineering signals to look for.
 - Discuss when a pattern is overengineering.
 - Show how tests make pattern behavior easier to review than diagrams alone.
 - Explain how failure behavior affects whether a pattern is safe to use.
+
+## Next Practical Step
+
+Add Template Method with a billing retry workflow. It would show a fixed
+business process with provider-specific variation, which is common in payment
+and integration code.
