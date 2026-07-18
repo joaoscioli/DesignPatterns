@@ -156,6 +156,12 @@ A reviewer should inspect the Command, State, and Specification examples first.
 Together they show how patterns are selected from business pressure instead of
 being added as decoration.
 
+## Portfolio Proof
+
+This repository proves design vocabulary with restraint. The examples are small,
+tested, and connected to backend scenarios so the discussion stays practical
+instead of theoretical.
+
 ## Tech Stack
 
 - Java 21
