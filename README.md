@@ -108,7 +108,7 @@ It demonstrates:
 - decoupling command creation from command execution;
 - executing queued work in a predictable order;
 - validating command input before dispatch;
-- testing command results and queue cleanup.
+- testing command results, queue cleanup, empty dispatch, and failure behavior.
 
 ### Chain of Responsibility Pattern
 
