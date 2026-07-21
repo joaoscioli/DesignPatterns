@@ -149,6 +149,7 @@ mvn test
 - [Next Patterns Roadmap](docs/next-patterns-roadmap.md)
 - [State Pattern Design](docs/state-pattern-design.md)
 - [Specification Pattern Design](docs/specification-pattern-design.md)
+- [Changelog](CHANGELOG.md)
 
 ## Interview Checkpoint
 
