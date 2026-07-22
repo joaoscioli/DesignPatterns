@@ -2,6 +2,9 @@
 
 This project follows small, reviewable increments. Dates use `YYYY-MM-DD`.
 
+Review cadence: each portfolio update should connect a pattern to a realistic
+backend pressure, a test signal, or a trade-off worth discussing.
+
 ## Unreleased
 
 - Planned: Template Method example for billing retry workflows.
