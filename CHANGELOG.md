@@ -11,6 +11,11 @@ Use this changelog to show pattern growth by intent. Each entry should make it
 clear which business pressure justified the pattern and which test proves the
 behavior.
 
+## Review Readiness
+
+Ready for interview review when each highlighted pattern has code, tests, and a
+short explanation of the trade-off it introduces.
+
 ## Unreleased
 
 - Planned: Template Method example for billing retry workflows.
