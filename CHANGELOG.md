@@ -16,6 +16,9 @@ behavior.
 Ready for interview review when each highlighted pattern has code, tests, and a
 short explanation of the trade-off it introduces.
 
+Current public signal: practical Java pattern examples tied to backend domain
+problems, with tests that explain behavior.
+
 ## Unreleased
 
 - Planned: Template Method example for billing retry workflows.
