@@ -16,3 +16,9 @@ Use this short script to present the repository in a technical interview.
 - Patterns are selected from business pressure.
 - The repository avoids abstract examples with no domain context.
 - Trade-offs matter as much as pattern names.
+
+## Before The Interview
+
+- Pick three patterns to discuss deeply.
+- Prepare one example of when a pattern would be overengineering.
+- Connect each pattern to a test that proves behavior.
