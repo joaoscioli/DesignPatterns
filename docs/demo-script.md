@@ -22,3 +22,9 @@ Use this short script to present the repository in a technical interview.
 - Pick three patterns to discuss deeply.
 - Prepare one example of when a pattern would be overengineering.
 - Connect each pattern to a test that proves behavior.
+
+## Avoid Saying
+
+- "I used patterns because they are best practices." Instead, connect each
+  pattern to a concrete change pressure.
+- "This pattern is always better." Instead, explain the trade-off.
