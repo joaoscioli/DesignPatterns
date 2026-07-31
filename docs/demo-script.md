@@ -23,6 +23,13 @@ Use this short script to present the repository in a technical interview.
 - Prepare one example of when a pattern would be overengineering.
 - Connect each pattern to a test that proves behavior.
 
+## Evidence To Open
+
+- `src/main/java/com/joaoscioli/patterns/command/BillingCommandDispatcher.java`
+- `src/test/java/com/joaoscioli/patterns/command/BillingCommandDispatcherTest.java`
+- `src/test/java/com/joaoscioli/patterns/state/SubscriptionLifecycleTest.java`
+- `src/test/java/com/joaoscioli/patterns/specification/PlanUpgradePolicyTest.java`
+
 ## Avoid Saying
 
 - "I used patterns because they are best practices." Instead, connect each
