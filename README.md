@@ -143,6 +143,7 @@ mvn test
 - [Demo Script](docs/demo-script.md)
 - [Test Map](docs/test-map.md)
 - [Design Patterns Interview Guide](docs/interview-guide.md)
+- [Interview Questions](docs/interview-questions.md)
 - [Pattern Selection Guide](docs/pattern-selection.md)
 - [Pattern Trade-offs](docs/pattern-tradeoffs.md)
 - [Refactoring Signals](docs/refactoring-signals.md)
