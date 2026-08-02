@@ -140,6 +140,7 @@ mvn test
 ## Interview Preparation
 
 - [Pattern Catalog](docs/pattern-catalog.md)
+- [Reviewer Scorecard](docs/reviewer-scorecard.md)
 - [Demo Script](docs/demo-script.md)
 - [Test Map](docs/test-map.md)
 - [Design Patterns Interview Guide](docs/interview-guide.md)
