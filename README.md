@@ -141,6 +141,7 @@ mvn test
 
 - [Pattern Catalog](docs/pattern-catalog.md)
 - [Reviewer Scorecard](docs/reviewer-scorecard.md)
+- [Technical Depth Map](docs/technical-depth-map.md)
 - [Demo Script](docs/demo-script.md)
 - [Test Map](docs/test-map.md)
 - [Design Patterns Interview Guide](docs/interview-guide.md)
