@@ -1,24 +1,26 @@
 # Security Policy
 
-This repository is a design pattern study lab. It does not process production
-data, but examples should still avoid unsafe defaults.
+This repository is a Java design-pattern lab, so the main security concern is
+keeping examples safe, dependency usage clear, and no secrets in the repository.
 
 ## Supported Scope
 
-Security review focuses on:
+Security feedback is welcome for:
 
-- examples that demonstrate unsafe object creation or data access patterns;
-- accidental secrets committed to examples or documentation;
-- dependencies used by runnable examples;
-- misleading guidance that could encourage insecure design.
+- dependency vulnerabilities;
+- unsafe example code;
+- accidental secret exposure;
+- misleading documentation that could encourage insecure design.
 
-## Reporting A Security Concern
+## Reporting
 
-Open a concise issue describing the pattern, example, or document that needs
-attention. Do not include real credentials or private data.
+Please do not open a public issue with sensitive details.
 
-## Development Practices
+Send a private report to `joaoscioli@outlook.com` with the affected file, the
+risk, and a suggested mitigation when possible.
 
-- Keep examples small and explicit.
-- Avoid real secrets in sample code.
-- Prefer secure defaults when a pattern touches object creation or access.
+## Security Expectations
+
+- Examples should avoid hardcoded secrets.
+- Patterns should not hide risky behavior behind abstraction.
+- Documentation should call out trade-offs when an example simplifies reality.
