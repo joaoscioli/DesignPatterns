@@ -15,6 +15,13 @@ This repository is maintained as a design pattern study lab.
 - Update the pattern catalog or roadmap when needed.
 - Add interview notes when the change introduces a useful trade-off.
 
+## Portfolio Contribution Discipline
+
+- Start from a small issue with a clear reviewer signal.
+- Keep each pull request narrow enough to explain in five minutes.
+- Prefer examples that pair code, tests, and trade-off notes.
+- Avoid adding patterns that do not solve a concrete design pressure.
+
 ## Review Focus
 
 Reviewers should look for simple examples, clear intent, and honest discussion
