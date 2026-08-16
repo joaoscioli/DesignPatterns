@@ -18,6 +18,11 @@ practical usefulness of the examples.
 - A test does not prove the behavior the pattern is meant to protect.
 - A new pattern would strengthen the learning path.
 
+## Review Questions
+
+For portfolio or interview review, include the pattern, class, or test being
+discussed and the trade-off you want to evaluate.
+
 ## Out Of Scope
 
 - Framework-specific architecture reviews unrelated to the pattern.
