@@ -173,6 +173,12 @@ This repository proves design vocabulary with restraint. The examples are small,
 tested, and connected to backend scenarios so the discussion stays practical
 instead of theoretical.
 
+## Fast Review Path
+
+1. Read the [30-Second Pitch](docs/30-second-pitch.md) to understand the repository signal.
+2. Open the [Interview Route](docs/interview-route.md) to choose the best examples to discuss.
+3. Inspect Command, State, and Specification tests to validate practical design decisions.
+
 ## Tech Stack
 
 - Java 21
