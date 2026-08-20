@@ -24,6 +24,14 @@ problems, with tests that explain behavior.
 - Planned: Template Method example for billing retry workflows.
 - Planned: Proxy or Composite examples for backend-oriented trade-offs.
 
+## 2026-08 Interview Readiness
+
+- Added fast review path and stronger interview navigation for pattern examples.
+- Refined GitHub hygiene with issue, pull request, CODEOWNERS, security, support,
+  contributing, and Dependabot configuration updates.
+- Clarified how to discuss patterns through change pressure, tests, and
+  trade-offs instead of name-dropping.
+
 ## 2026-07 Portfolio Hardening
 
 - Expanded pattern examples around Command, State, Specification, and Chain of
