@@ -162,6 +162,7 @@ mvn test
 - [Interview Red Flags](docs/interview-red-flags.md)
 - [Technical Storytelling Guide](docs/technical-storytelling-guide.md)
 - [Next 90 Days Roadmap](docs/next-90-days-roadmap.md)
+- [Hiring Manager One-Pager](docs/hiring-manager-one-pager.md)
 - [Next Review Focus](docs/next-review-focus.md)
 - [Demo Script](docs/demo-script.md)
 - [Test Map](docs/test-map.md)
