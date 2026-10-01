@@ -12,6 +12,10 @@ public class CheckoutService {
 
         long finalAmountCents = discountStrategy.applyTo(subtotalCents);
 
+        if (finalAmountCents < 0 || finalAmountCents > subtotalCents) {
+            throw new IllegalStateException("discount strategy must return an amount between zero and subtotalCents");
+        }
+
         return new CheckoutResult(subtotalCents, finalAmountCents, discountStrategy.description());
     }
 }

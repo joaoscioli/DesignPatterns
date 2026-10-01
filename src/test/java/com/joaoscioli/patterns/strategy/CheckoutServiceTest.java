@@ -71,6 +71,27 @@ class CheckoutServiceTest {
         assertThrows(NullPointerException.class, () -> checkoutService.checkout(10_000, null));
     }
 
+    @ParameterizedTest
+    @ValueSource(longs = {-1, 10_001, Long.MAX_VALUE})
+    void rejectsStrategiesThatViolateTheDiscountContract(long finalAmountCents) {
+        DiscountStrategy invalidStrategy = new DiscountStrategy() {
+            @Override
+            public long applyTo(long subtotalCents) {
+                return finalAmountCents;
+            }
+
+            @Override
+            public String description() {
+                return "invalid discount";
+            }
+        };
+
+        var exception = assertThrows(IllegalStateException.class,
+                () -> checkoutService.checkout(10_000, invalidStrategy));
+
+        assertEquals("discount strategy must return an amount between zero and subtotalCents", exception.getMessage());
+    }
+
     private static Stream<Arguments> discountStrategies() {
         return Stream.of(
                 Arguments.of(new NoDiscountStrategy(), 10_000),
