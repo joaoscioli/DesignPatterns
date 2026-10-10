@@ -18,7 +18,8 @@ public class SubscriptionEventPublisher {
     public void publish(SubscriptionEvent event) {
         Objects.requireNonNull(event, "event must not be null");
 
-        observers.forEach(observer -> observer.onSubscriptionEvent(event));
+        // Subscription changes during a callback apply to the next publication.
+        List.copyOf(observers).forEach(observer -> observer.onSubscriptionEvent(event));
     }
 
     public int observerCount() {

@@ -2,11 +2,43 @@ package com.joaoscioli.patterns.observer;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class SubscriptionEventPublisherTest {
+    @Test
+    void callbackSubscriptionChangesTakeEffectOnTheNextPublication() {
+        var publisher = new SubscriptionEventPublisher();
+        var notifications = new ArrayList<String>();
+        var event = new SubscriptionEvent(SubscriptionEventType.CREATED, "acme", "sub-123");
+        SubscriptionEventObserver late = received -> notifications.add("late");
+        SubscriptionEventObserver removed = received -> notifications.add("removed");
+        SubscriptionEventObserver changing = new SubscriptionEventObserver() {
+            @Override
+            public void onSubscriptionEvent(SubscriptionEvent received) {
+                notifications.add("changing");
+                publisher.unsubscribe(this);
+                publisher.unsubscribe(removed);
+                publisher.subscribe(late);
+            }
+        };
+        publisher.subscribe(changing);
+        publisher.subscribe(removed);
+
+        publisher.publish(event);
+
+        assertEquals(List.of("changing", "removed"), notifications);
+        assertEquals(1, publisher.observerCount());
+
+        publisher.publish(event);
+
+        assertEquals(List.of("changing", "removed", "late"), notifications);
+    }
+
     @Test
     void notifiesAllSubscribedObservers() {
         SubscriptionEventPublisher publisher = new SubscriptionEventPublisher();
