@@ -8,8 +8,34 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 class SubscriptionEventPublisherTest {
+    @Test
+    void observerFailureStopsDeliveryButDoesNotRemoveSubscriptions() {
+        var publisher = new SubscriptionEventPublisher();
+        var notifications = new ArrayList<String>();
+        var failure = new IllegalStateException("email transport unavailable");
+        SubscriptionEventObserver failing = event -> {
+            notifications.add("email attempted");
+            throw failure;
+        };
+        publisher.subscribe(failing);
+        publisher.subscribe(event -> notifications.add("audit recorded"));
+        var event = new SubscriptionEvent(SubscriptionEventType.CREATED, "acme", "sub-123");
+
+        // This synchronous publisher is fail-fast; it has no retry or exception isolation.
+        assertSame(failure, assertThrows(IllegalStateException.class, () -> publisher.publish(event)));
+        assertEquals(List.of("email attempted"), notifications);
+        assertEquals(2, publisher.observerCount());
+
+        publisher.unsubscribe(failing);
+        publisher.publish(event);
+
+        assertEquals(List.of("email attempted", "audit recorded"), notifications);
+        assertEquals(1, publisher.observerCount());
+    }
+
     @Test
     void callbackSubscriptionChangesTakeEffectOnTheNextPublication() {
         var publisher = new SubscriptionEventPublisher();
