@@ -10,6 +10,29 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LegacyPaymentAdapterTest {
     @Test
+    void preservesProviderFailureWithoutRetryingOrFabricatingAResult() {
+        var failure = new IllegalStateException("provider unavailable");
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        var client = new LegacyPaymentClient() {
+            @Override
+            public LegacyPaymentResponse makePayment(String account, long cents, String currency) {
+                attempts.incrementAndGet();
+                assertEquals("customer-123", account);
+                assertEquals(12_500, cents);
+                assertEquals("BRL", currency);
+                throw failure;
+            }
+        };
+        var processor = new LegacyPaymentAdapter(client);
+
+        var actual = org.junit.jupiter.api.Assertions.assertThrowsExactly(IllegalStateException.class,
+                () -> processor.charge(new PaymentRequest("customer-123", 12_500, "BRL")));
+
+        org.junit.jupiter.api.Assertions.assertSame(failure, actual);
+        assertEquals(1, attempts.get());
+    }
+
+    @Test
     void adaptsLegacyPaymentResponseToDomainResult() {
         PaymentProcessor processor = new LegacyPaymentAdapter(new LegacyPaymentClient());
         PaymentRequest request = new PaymentRequest("customer-123", 12_500, "BRL");
