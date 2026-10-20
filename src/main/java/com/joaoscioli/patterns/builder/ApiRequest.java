@@ -1,6 +1,7 @@
 package com.joaoscioli.patterns.builder;
 
 import java.time.Duration;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -11,6 +12,22 @@ public record ApiRequest(
         String body,
         Duration timeout
 ) {
+    public ApiRequest {
+        if (method == null || method.isBlank()) {
+            throw new IllegalArgumentException("method must not be blank");
+        }
+        if (url == null || url.isBlank()) {
+            throw new IllegalArgumentException("url must not be blank");
+        }
+        headers = Map.copyOf(Objects.requireNonNull(headers, "headers must not be null"));
+        Objects.requireNonNull(body, "body must not be null");
+        Objects.requireNonNull(timeout, "timeout must not be null");
+        if (timeout.isZero() || timeout.isNegative()) {
+            throw new IllegalArgumentException("timeout must be greater than zero");
+        }
+        method = method.toUpperCase(Locale.ROOT);
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -48,29 +65,13 @@ public record ApiRequest(
         }
 
         public ApiRequest build() {
-            validateRequiredFields();
-
             return new ApiRequest(
-                    method.toUpperCase(),
+                    method,
                     url,
                     headers,
                     body,
                     timeout
             );
-        }
-
-        private void validateRequiredFields() {
-            if (method == null || method.isBlank()) {
-                throw new IllegalArgumentException("method must not be blank");
-            }
-
-            if (url == null || url.isBlank()) {
-                throw new IllegalArgumentException("url must not be blank");
-            }
-
-            Objects.requireNonNull(headers, "headers must not be null");
-            Objects.requireNonNull(body, "body must not be null");
-            Objects.requireNonNull(timeout, "timeout must not be null");
         }
     }
 }
