@@ -10,6 +10,31 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BillingCommandDispatcherTest {
     @Test
+    void retryResumesAtFailureWithoutRepeatingSuccessfulCommandsOrSkippingPendingWork() {
+        var dispatcher = new BillingCommandDispatcher();
+        var calls = new java.util.ArrayList<String>();
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        var failure = new IllegalStateException("temporary failure");
+        dispatcher.enqueue(() -> { calls.add("first"); return new CommandResult("first", "done"); });
+        dispatcher.enqueue(() -> {
+            calls.add("second");
+            if (attempts.incrementAndGet() == 1) { throw failure; }
+            return new CommandResult("second", "recovered");
+        });
+        dispatcher.enqueue(() -> { calls.add("third"); return new CommandResult("third", "done"); });
+
+        org.junit.jupiter.api.Assertions.assertSame(failure,
+                assertThrows(IllegalStateException.class, dispatcher::dispatchAll));
+        assertEquals(List.of("first", "second"), calls);
+        assertEquals(2, dispatcher.queuedCommands());
+        assertEquals(List.of(new CommandResult("second", "recovered"), new CommandResult("third", "done")),
+                dispatcher.dispatchAll());
+        assertEquals(List.of("first", "second", "second", "third"), calls);
+        assertEquals(0, dispatcher.queuedCommands());
+        assertEquals(List.of(), dispatcher.dispatchAll());
+    }
+
+    @Test
     void dispatchingEmptyQueueReturnsNoResults() {
         BillingCommandDispatcher dispatcher = new BillingCommandDispatcher();
 

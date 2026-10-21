@@ -110,6 +110,12 @@ It demonstrates:
 - validating command input before dispatch;
 - testing command results, queue cleanup, empty dispatch, and failure behavior.
 
+Successful commands leave the in-memory queue immediately. If a later command
+throws, dispatch stops and an explicit retry starts at that failed command,
+followed by pending commands. Results from an interrupted dispatch are not returned.
+A command that performs a side effect before throwing still needs idempotency;
+this single-threaded example does not provide durable or exactly-once execution.
+
 ### Chain of Responsibility Pattern
 
 The Chain of Responsibility example models a subscription approval flow where
