@@ -19,6 +19,11 @@ public class LegacyPaymentAdapter implements PaymentProcessor {
                 request.currency()
         );
 
+        if (response == null) {
+            // An absent response leaves the payment outcome unknown; do not retry here.
+            throw new IllegalStateException("legacy provider returned no payment response");
+        }
+
         return new PaymentResult(
                 response.transactionCode(),
                 response.approved(),
