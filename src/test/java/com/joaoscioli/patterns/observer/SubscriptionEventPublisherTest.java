@@ -12,6 +12,36 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 class SubscriptionEventPublisherTest {
     @Test
+    void nestedPublicationUsesNewSubscriptionsWhileOuterDeliveryKeepsItsSnapshot() {
+        var publisher = new SubscriptionEventPublisher();
+        var deliveries = new ArrayList<String>();
+        var outer = new SubscriptionEvent(SubscriptionEventType.CREATED, "acme", "outer");
+        var nested = new SubscriptionEvent(SubscriptionEventType.CANCELED, "acme", "nested");
+        SubscriptionEventObserver original = event -> deliveries.add(event == outer ? "outer:original" : "nested:original");
+        SubscriptionEventObserver late = event -> {
+            assertSame(nested, event);
+            deliveries.add("nested:late");
+        };
+        publisher.subscribe(new SubscriptionEventObserver() {
+            @Override
+            public void onSubscriptionEvent(SubscriptionEvent event) {
+                assertSame(outer, event);
+                deliveries.add("outer:changing");
+                publisher.unsubscribe(this);
+                publisher.unsubscribe(original);
+                publisher.subscribe(late);
+                publisher.publish(nested);
+            }
+        });
+        publisher.subscribe(original);
+
+        publisher.publish(outer);
+
+        assertEquals(List.of("outer:changing", "nested:late", "outer:original"), deliveries);
+        assertEquals(1, publisher.observerCount());
+    }
+
+    @Test
     void observerFailureStopsDeliveryButDoesNotRemoveSubscriptions() {
         var publisher = new SubscriptionEventPublisher();
         var notifications = new ArrayList<String>();
