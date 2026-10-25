@@ -16,7 +16,7 @@ public class BillingCommandDispatcher {
     public List<CommandResult> dispatchAll() {
         List<CommandResult> results = new ArrayList<>();
         while (!queue.isEmpty()) {
-            results.add(queue.getFirst().execute());
+            results.add(Objects.requireNonNull(queue.getFirst().execute(), "command result must not be null"));
             // Remove only after success; retry resumes at the failed command.
             queue.removeFirst();
         }

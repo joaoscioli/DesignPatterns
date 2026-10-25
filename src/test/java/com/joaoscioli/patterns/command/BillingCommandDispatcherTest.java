@@ -35,6 +35,28 @@ class BillingCommandDispatcherTest {
     }
 
     @Test
+    void nullResultKeepsFailedAndPendingCommandsQueuedForExplicitRetry() {
+        var dispatcher = new BillingCommandDispatcher();
+        var calls = new java.util.ArrayList<String>();
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        dispatcher.enqueue(() -> { calls.add("first"); return new CommandResult("first", "done"); });
+        dispatcher.enqueue(() -> {
+            calls.add("second");
+            return attempts.incrementAndGet() == 1 ? null : new CommandResult("second", "recovered");
+        });
+        dispatcher.enqueue(() -> { calls.add("third"); return new CommandResult("third", "done"); });
+
+        var failure = assertThrows(NullPointerException.class, dispatcher::dispatchAll);
+        assertEquals("command result must not be null", failure.getMessage());
+        assertEquals(List.of("first", "second"), calls);
+        assertEquals(2, dispatcher.queuedCommands());
+        assertEquals(List.of(new CommandResult("second", "recovered"), new CommandResult("third", "done")),
+                dispatcher.dispatchAll());
+        assertEquals(List.of("first", "second", "second", "third"), calls);
+        assertEquals(0, dispatcher.queuedCommands());
+    }
+
+    @Test
     void dispatchingEmptyQueueReturnsNoResults() {
         BillingCommandDispatcher dispatcher = new BillingCommandDispatcher();
 
