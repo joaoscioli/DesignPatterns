@@ -71,6 +71,25 @@ class ApiRequestTest {
     }
 
     @Test
+    void reusingBuilderKeepsEarlierRequestsAndCallerHeadersIsolated() {
+        var callerHeaders = new java.util.HashMap<>(Map.of("X-Tenant", "acme"));
+        var builder = ApiRequest.builder().url("https://api.example.com/first").headers(callerHeaders);
+        callerHeaders.put("X-Tenant", "changed-before-build");
+        var first = builder.build();
+
+        var second = builder.url("https://api.example.com/second")
+                .method("post").body("second body").timeout(Duration.ofSeconds(2))
+                .headers(Map.of("X-Tenant", "beta")).build();
+        callerHeaders.clear();
+
+        assertEquals(new ApiRequest("GET", "https://api.example.com/first",
+                Map.of("X-Tenant", "acme"), "", Duration.ofSeconds(5)), first);
+        assertEquals(new ApiRequest("POST", "https://api.example.com/second",
+                Map.of("X-Tenant", "beta"), "second body", Duration.ofSeconds(2)), second);
+        assertThrows(UnsupportedOperationException.class, () -> first.headers().clear());
+    }
+
+    @Test
     void rejectsMissingUrl() {
         assertThrows(IllegalArgumentException.class, () -> ApiRequest.builder().build());
     }
