@@ -38,6 +38,12 @@ class CheckoutRefactoringTest {
         return Stream.of(
                 Arguments.of(10_000L, "none", 0, new NoDiscountStrategy(), 10_000L),
                 Arguments.of(10_000L, "percentage", 15, new PercentageDiscountStrategy(15), 8_500L),
+                // Whole-cent discount truncation must survive the refactoring at either side of a cent.
+                Arguments.of(6L, "percentage", 15, new PercentageDiscountStrategy(15), 6L),
+                Arguments.of(7L, "percentage", 15, new PercentageDiscountStrategy(15), 6L),
+                Arguments.of(99L, "percentage", 1, new PercentageDiscountStrategy(1), 99L),
+                Arguments.of(100L, "percentage", 1, new PercentageDiscountStrategy(1), 99L),
+                Arguments.of(1L, "percentage", 100, new PercentageDiscountStrategy(100), 0L),
                 Arguments.of(101L, "percentage", 15, new PercentageDiscountStrategy(15), 86L),
                 Arguments.of(101L, "percentage", 100, new PercentageDiscountStrategy(100), 0L),
                 Arguments.of(10_000L, "fixed", 2_500, new FixedAmountDiscountStrategy(2_500), 7_500L),
