@@ -15,6 +15,27 @@ class SpecificationTest {
     }
 
     @Test
+    void composedRulesPropagateTheOriginalFailureAndCanEvaluateALaterCandidate() {
+        var calls = new ArrayList<String>();
+        var failure = new IllegalStateException("eligibility source unavailable");
+        Specification<String> available = candidate -> {
+            calls.add("available:" + candidate);
+            if (candidate.equals("offline")) throw failure;
+            return true;
+        };
+        Specification<String> eligible = candidate -> { calls.add("eligible:" + candidate); return true; };
+        var policy = available.and(eligible);
+        assertTrue(calls.isEmpty());
+
+        assertSame(failure, assertThrowsExactly(IllegalStateException.class,
+                () -> policy.isSatisfiedBy("offline")));
+        assertEquals(List.of("available:offline"), calls);
+
+        assertTrue(policy.isSatisfiedBy("healthy"));
+        assertEquals(List.of("available:offline", "available:healthy", "eligible:healthy"), calls);
+    }
+
+    @Test
     void compositionIsLazyAndShortCircuitsInLeftToRightOrder() {
         var calls = new ArrayList<String>();
         Specification<String> left = candidate -> { calls.add("left:" + candidate); return candidate.equals("yes"); };
