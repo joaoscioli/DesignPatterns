@@ -9,6 +9,30 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LegacyPaymentAdapterTest {
+    @org.junit.jupiter.params.ParameterizedTest
+    @org.junit.jupiter.params.provider.NullAndEmptySource
+    @org.junit.jupiter.params.provider.ValueSource(strings = {" ", "\t\n"})
+    void incompleteApprovalFailsWithoutRetryButDeclinesRemainRepresentable(String transactionCode) {
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        var client = new LegacyPaymentClient() {
+            @Override
+            public LegacyPaymentResponse makePayment(String account, long cents, String currency) {
+                return new LegacyPaymentResponse(transactionCode, attempts.incrementAndGet() == 1, "provider result");
+            }
+        };
+        var processor = new LegacyPaymentAdapter(client);
+        var request = new PaymentRequest("customer-123", 100, "BRL");
+
+        var failure = org.junit.jupiter.api.Assertions.assertThrowsExactly(IllegalStateException.class,
+                () -> processor.charge(request));
+        assertEquals("legacy provider approved payment without a transaction code", failure.getMessage());
+        assertEquals(1, attempts.get());
+
+        // A later explicit call can return a decline even when no transaction was created.
+        assertEquals(new PaymentResult(transactionCode, false, "provider result"), processor.charge(request));
+        assertEquals(2, attempts.get());
+    }
+
     @Test
     void missingProviderResponseFailsExplicitlyWithoutRetryingAnUnknownPayment() {
         var attempts = new java.util.concurrent.atomic.AtomicInteger();

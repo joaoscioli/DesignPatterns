@@ -24,6 +24,11 @@ public class LegacyPaymentAdapter implements PaymentProcessor {
             throw new IllegalStateException("legacy provider returned no payment response");
         }
 
+        if (response.approved() && (response.transactionCode() == null || response.transactionCode().isBlank())) {
+            // An approval without a reference cannot safely confirm or retry a charge.
+            throw new IllegalStateException("legacy provider approved payment without a transaction code");
+        }
+
         return new PaymentResult(
                 response.transactionCode(),
                 response.approved(),
