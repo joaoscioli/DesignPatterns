@@ -76,6 +76,12 @@ It demonstrates:
 The Observer example publishes subscription lifecycle events to independent
 email and audit observers.
 
+Registering the same observer again is idempotent (using Java equality): it keeps
+its original delivery order and receives each publication once. One unsubscribe
+removes it; registering it later appends it after current observers. This avoids
+duplicate callbacks within a publication, not duplicate business events or
+concurrent access protection.
+
 It demonstrates:
 
 - notifying multiple subscribers without coupling the publisher to concrete actions;

@@ -8,7 +8,11 @@ public class SubscriptionEventPublisher {
     private final List<SubscriptionEventObserver> observers = new ArrayList<>();
 
     public void subscribe(SubscriptionEventObserver observer) {
-        observers.add(Objects.requireNonNull(observer, "observer must not be null"));
+        Objects.requireNonNull(observer, "observer must not be null");
+        // Repeated registration must not duplicate the observer's side effects.
+        if (!observers.contains(observer)) {
+            observers.add(observer);
+        }
     }
 
     public void unsubscribe(SubscriptionEventObserver observer) {

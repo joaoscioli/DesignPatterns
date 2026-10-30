@@ -12,6 +12,31 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 
 class SubscriptionEventPublisherTest {
     @Test
+    void repeatedRegistrationDeliversOnceAndOneUnsubscribeRemovesTheObserver() {
+        var publisher = new SubscriptionEventPublisher();
+        var deliveries = new ArrayList<String>();
+        SubscriptionEventObserver first = event -> deliveries.add("first");
+        SubscriptionEventObserver second = event -> deliveries.add("second");
+        var event = new SubscriptionEvent(SubscriptionEventType.CREATED, "acme", "sub-123");
+        publisher.subscribe(first);
+        publisher.subscribe(second);
+        publisher.subscribe(first);
+
+        assertEquals(2, publisher.observerCount());
+        publisher.publish(event);
+        assertEquals(List.of("first", "second"), deliveries);
+
+        publisher.unsubscribe(first);
+        publisher.publish(event);
+        assertEquals(List.of("first", "second", "second"), deliveries);
+        assertEquals(1, publisher.observerCount());
+
+        publisher.subscribe(first);
+        publisher.publish(event);
+        assertEquals(List.of("first", "second", "second", "second", "first"), deliveries);
+    }
+
+    @Test
     void nestedPublicationUsesNewSubscriptionsWhileOuterDeliveryKeepsItsSnapshot() {
         var publisher = new SubscriptionEventPublisher();
         var deliveries = new ArrayList<String>();
